@@ -4,22 +4,22 @@ import { refs } from "./refs";
 import _debounce from "lodash.debounce";
 import { createCountriesMarkup } from "./markup";
 import { createCountryMarkup } from "./markup";
+import { addMarkup } from "./markup";
 
-const DEBOUNCE_DELAY = 1000;
+const DEBOUNCE_DELAY = 300;
 
 function onForm(e) {
-  const inputValue = e.target.value;
+  const inputValue = e.target.value.trim();
 
   fetchCountries(inputValue)
     .then((response) => {
       console.log(response);
 
-      //   const markup = createCountriesMarkup(response);
-      //   refs.countryList.innerHTML = markup;
+      const markupCountries = createCountriesMarkup(response);
+      addMarkup(refs.countryList, markupCountries);
 
-      const markup = createCountryMarkup(response);
-
-      refs.countryInfo.innerHTML = markup;
+      const markupCountry = createCountryMarkup(response);
+      addMarkup(refs.countryInfo, markupCountry);
     })
 
     .catch((rejected) => {

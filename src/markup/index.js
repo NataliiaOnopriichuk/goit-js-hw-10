@@ -1,9 +1,9 @@
 export function createCountriesMarkup(data = []) {
   return data
-    .map((el) => {
+    .map(({ flags, name }) => {
       return `<li class='list__item'>
-      <img class='list__img' src='${el.flags.svg}' alt = 'flag of ${el.name.official}'>
-      <p>${el.name.official}<p>
+      <img class='list__img' src='${flags.svg}' alt = 'flag of ${name.official}'>
+      <p>${name.official}<p>
       </li>`;
     })
     .join("");
@@ -11,20 +11,19 @@ export function createCountriesMarkup(data = []) {
 
 export function createCountryMarkup(data = []) {
   return data
-    .map((el) => {
+    .map(({ flags, name, capital, population, languages }) => {
       return `<ul class='list__item-country'>
           <li class='list__item-name'>
-          <img class='list__name-country' src='${
-            el.flags.svg
-          }' alt = 'flag of ${el.name.official}'>
-      <p>${el.name.official}<p>
+          <img class='list__name-country' src='${flags.svg}' alt = 'flag of ${
+        name.official
+      }'>
+      <p>${name.official}<p>
       </li>
-    <li class='list__info-country'><b>Capital:</b> ${el.capital}</li>
-    <li class='list__info-country'><b>Population:</b> ${el.population}</li>
+    <li class='list__info-country'><b>Capital:</b> ${capital}</li>
+    <li class='list__info-country'><b>Population:</b> ${population}</li>
     <li class='list__info-country'><b>Languages:</b> ${Object.values(
-      el.languages
+      languages
     ).join(", ")}</li>
-   
       </ul>`;
     })
     .join("");
